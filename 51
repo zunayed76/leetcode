@@ -21,7 +21,6 @@ public:
     {
         if(r == n)
         {
-            // code baki
             solArr.push_back(board);
             // proti dhap e auto clean hoye jabe board. jehetu 
             //backtracknig hocche
@@ -39,7 +38,7 @@ public:
             
             nqueen(r+1, n);    //recursion part
             
-            board[r][c] = '.';   //cleanign board vector before backtarcking
+            board[r][c] = '.';   //cleaning board vector before backtracking
             col.erase(c);        // cleaning col map
             posDiag.erase(r+c);  // cleaning
             negDiag.erase(r-c);  // cleaning
