@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<vector<string>> solArr;  // global var
+    vector<string> board;
+    unordered_map<int, int> col;
+    unordered_map<int, int> posDiag;
+    unordered_map<int, int> negDiag;
+    string s = "";
+
+    vector<vector<string>> solveNQueens(int n) {
+        for(int j=0;j<n;j++)
+            s += ".";
+        for(int i=0;i<n;i++)
+            board.push_back(s);
+        
+        nqueen(0, n);
+        return solArr;
+    }
+    
+    void nqueen(int r, int n)
+    {
+        if(r == n)
+        {
+            // code baki
+            solArr.push_back(board);
+            // proti dhap e auto clean hoye jabe board. jehetu 
+            //backtracknig hocche
+            //ejonno alada kore clean korar dorkar nai
+            return;
+        }
+        for(int c=0;c<n;c++)
+        {
+            if(col.find(c) != col.end() || posDiag.find(r+c) != posDiag.end() || negDiag.find(r-c) != negDiag.end())
+                continue;
+            board[r][c] = 'Q';
+            col[c] = r;
+            posDiag[r+c] = 21;
+            negDiag[r-c] = 12;
+            
+            nqueen(r+1, n);    //recursion part
+            
+            board[r][c] = '.';   //cleanign board vector before backtarcking
+            col.erase(c);        // cleaning col map
+            posDiag.erase(r+c);  // cleaning
+            negDiag.erase(r-c);  // cleaning
+            
+        }
+        return;
+    }
+    
+};
