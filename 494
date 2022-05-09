@@ -1,0 +1,59 @@
+//dynamic programing
+class Solution {
+public:
+    vector<int> num;
+    int siz;
+    map<pair<int, int>, int> dp;   // ager possible solution store kore rakhbo
+    
+    int findTargetSumWays(vector<int>& nums, int target) {
+        num = nums;
+        siz = nums.size();
+        
+        return backtrack(0, 0, target);
+        
+    }
+    int backtrack(int depth, int sum, int target)
+    {
+        if(depth == siz)
+        {
+            if(sum == target)
+                return 1;
+            else 
+                return 0;
+        }
+        if(dp.find({depth,sum}) != dp.end())
+            return dp[{depth,sum}];
+        dp[{depth,sum}] = backtrack(depth+1, sum+ num[depth], target) + backtrack(depth+1, sum- num[depth], target);
+        return dp[{depth,sum}];   
+    }
+};
+
+
+
+// backtracking (brute force)
+class Solution {
+public:
+    vector<int> num;
+    int siz;
+    int sol = 0;
+    int findTargetSumWays(vector<int>& nums, int target) {
+        num = nums;
+        siz = nums.size();
+        possiblesol(0, 0, target);
+        return sol;
+    }
+    void possiblesol(int depth, int sum, int target)
+    {
+        if(depth == siz)
+        {
+            if(sum == target)
+                sol++;
+            return;
+        }
+        possiblesol(depth+1, sum+ num[depth], target);
+        possiblesol(depth+1, sum- num[depth], target);
+        return;
+        
+    }
+};
+
