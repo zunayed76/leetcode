@@ -1,0 +1,20 @@
+import java.util.regex.*;
+
+class Solution {
+    
+    public boolean isNumber(String s) {
+        
+        boolean one = Pattern.matches("[+-]?[0-9]*\\.[0-9]+[eE][+-]?[0-9]+", s);   //decimal(. follwed by one or more)+e+int
+        boolean two = Pattern.matches("[+-]?[0-9]+\\.[0-9]*[eE][+-]?[0-9]+", s);   //decimal(one follwed by.)+e+int         
+                
+
+        boolean thr = Pattern.matches("[+-]?[0-9]*\\.[0-9]+", s);  // decimal . follwed by one or more
+        boolean fou = Pattern.matches("[+-]?[0-9]+\\.[0-9]*", s);  // decimal one follwed by dot
+        
+        boolean fiv = Pattern.matches("[+-]?[0-9]+[eE][+-]?[0-9]+", s);  //int + e + int
+        
+        boolean intt = Pattern.matches("[+-]?[0-9]+", s);
+        return one||two||intt||thr||fou||fiv;
+    }
+}
+
