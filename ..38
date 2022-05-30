@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        if(n==1)
+            return "1";
+        string t = countAndSay(n-1);
+        
+        
+        
+        string s = "";
+        for(int i=0;i<t.length();i++)
+        {
+            int j = 1;
+            if(i==t.length()-1) // i er value last e ese porle
+            {
+                s = s + '1' + t[i];
+                break;
+            }
+            while(t[i]==t[i+1])  //first initial value er jonno 1 dhore rakha
+            {
+                j++;
+                if(i+1==t.length()-1)
+                {
+                    i++;    //i er value 1 barai dicchi jate for loop ar na jay
+                    break;
+                }
+                i++;
+            }
+            while(j)
+            {
+                s += (j%10)+'0';
+                j/=10;
+            }
+            s += t[i];
+        }
+        //cout<<s<<endl;
+        return s;
+    }
+};
